@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "scadaconnectionsheetwebhook",
+  "private_key_id": "1bc47d5254a2cdfefa434a42b12310484495d1f2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDN5B6FI3Lam4vM\nBtpAqURMZJ7oa8ydtytV94uHOe5Xs6JR3Rm8L66owY10hSSG2fiNnGqzU3cRJQiz\ndIGue5tRjbJv3rfEdJUmF3//N+dhVHsNbadTrsgtzBfv0TSwcbS15isYmepYTdCL\nL1Fp1XyYe4mdH/piYWCAeF6dbkU23HQuO8vFH2bWmqPQ/tjZckRUzQKWnsvpKY9G\nkLMhDVJps9BTo3th5EYC9W1z4+BBOxyEFVdH7EYGI/6hAmVo6ZN+JDQQtcMmrK7m\nafMSoavoXFnQEj66SHFlf7Uj2+n7TTUHCPvGI+bmX5WSjcTK0rEwfAp7ccL/rkkg\ndvX1Hhh5AgMBAAECggEAKhO4PwpXEyEdyVUPLo7JM/mOVj6Nox/Hffqoq7qloIvI\nHQXcGA8AmWFw+MKrC9opBzvTvJFOsJTKee5SAGgnflvAf0dbdA1FW/MKiAyTP1tm\nCIED5MDADUf8DllJdNPQFCqVXSI7d89zUraZY1ErdPguUAu0fn2bHLY809ywzXyT\nQeS9bBmcf0F6cbtBQlzy7OFcR1mhmw5rAApayy2EzDcQMVPFVec4V/bdTxZHpYx4\nePVPMJzlnyf8eoru7QNV6gm06nSOYIe4eRAbdwPR/rUdQdZLL9aI5KJeN6+mS665\nKCTp2cYnFdZ6qB5lrFq+c/J0X+SCMzVrBSn4IYyi7wKBgQD1D7QLcfiA6DqyPZs4\nZDz9nl20WQEHKv7mzoDATcrq/g19DnL35Yl3EADN4k5qQI0fVU2l6Rwnsb8UkUBq\nMQYwK7563vBOkwWhXQNJJH1OdFqF+cmaTuLMVIrNQd0Z2ED3xnp0yx5C436CKoGo\n6JvJyECIoF0uxca7sXdzAtX2rwKBgQDXFNIPOrvF90hCBYEGHyKKC0jpoaZZ+EgS\ntDnA49M10NwTLKXtH8a12WMOrYbEfx1nEwMOrPU2ujOWtLh7feC2pCAcrarLfrFE\n5O9sEPY73DaVBUiTLSiP+JJ0JePTJBbSYVNv7QCFV+pAIXgAHboJmRbGJvHxcJYw\nv9voET2tVwKBgCmyXVEhOEY+vVX8k3+Z1qLUol8AUeN1Vl/RPSj7U45+Ya8omTlC\nzgv7Jhfh7LO5fgmZyxdyvX6niLqoKEypQMNLfiKL8ll8PJYDLH7yfXuu4oQvRzVB\nPOfFbsST81nlaNB/7fAXa3O4H5toPh2OToubzhcxKgm+Tx06ifeAwQUzAoGBAMTS\nO8xN/imSOiCYstKsSUo0O3v5PqbUivf6z2MR2WVFBS/SyuCtFIWzMm/rIgnNHVYG\n0uRqKFf1m2INbUktDyd0GCLGVia0gHpAWkz1VK/AvH4wgJKWX6koWrVJOywruWq6\nP8WMB87+fdJEDnFkwqsn2expFTzRv89Ks22x4VQvAoGAYg/+3+ULCPiTthlonAsw\nIH2Ljwz9LqpLeL8yINbacFM+4oMECYzHyv22480IeVt7CX7qbz2SgARJcyaUv8ld\nhW+5wXkBs+qmo09ta+qWHON6etdV8HA1vqJUOZZrocfokp9aKufAHHxEQf5kd/Kq\nfsuquHjOBmdJWaVb2OQmuYo=\n-----END PRIVATE KEY-----\n",
+  "client_email": "google-sheets-drive-chat-api@scadaconnectionsheetwebhook.iam.gserviceaccount.com",
+  "client_id": "102174436843567817695",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/google-sheets-drive-chat-api%40scadaconnectionsheetwebhook.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
