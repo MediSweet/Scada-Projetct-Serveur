@@ -4,8 +4,7 @@ from config.config import TABLES
 from tableToSheetMain.core.transform import transform_data, clean_data_for_sheets
 from services.database_service.sqlServer_connector import get_data_from_db
 from services.notification_service.ErrorNotification import envoyer_erreur_google_chat
-from services.google_sheets_service.sheets_operations import get_last_record_date, get_last_row_data_batch, \
-    get_last_row_data
+from services.google_sheets_service.sheets_operations import get_last_record_date
 from services.google_sheets_service.sheets_operations import  insert_data_into_sheet
 from services.google_sheets_service.sheets_connector import connect_to_google_sheet, get_gspread_client
 

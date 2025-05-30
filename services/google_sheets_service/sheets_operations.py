@@ -34,7 +34,7 @@ def get_last_row_data(sheet):
         # Conversion intelligente de TriggerTime si présent
         if 'TriggerTime' in last_row_series:
             last_row_series['TriggerTime'] = pd.to_datetime(
-                last_row_series['TriggerTime'], dayfirst=True, errors='coerce'
+                last_row_series['TriggerTime'], dayfirst=False, errors='coerce'
             )
 
         # Conversion automatique des colonnes machine (0/1) si elles commencent par certains préfixes
@@ -175,10 +175,7 @@ def insert_data_into_sheet(sheet, dataframe, tab_name=""):
             logging.info(f"🟡 [{tab_name}] Aucune donnée à insérer.")
             return 0
 
-        # if 'TriggerTime' in dataframe.columns:
-        #     dataframe['TriggerTime'] = dataframe['TriggerTime'].dt.strftime('%d/%m/%Y %H:%M:%S')
-
-        dataframe['TriggerTime'] = dataframe['TriggerTime'].astype(str)
+        dataframe['TriggerTime'] = dataframe['TriggerTime'].dt.strftime("%Y-%m-%d %H:%M:%S")
 
         columns = dataframe.columns.tolist()  # Extrait automatiquement tous les headers
 

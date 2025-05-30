@@ -8,12 +8,12 @@ from services.notification_service.ErrorNotification import envoyer_erreur_googl
 from tableToSheetMain.tableToSheetMain import table_to_sheet_main
 
 
-def start_scheduler():
-    """Démarre le scheduler APScheduler."""
-    scheduler = BackgroundScheduler()
+def start_scheduler(scheduler):
+
 
     try:
-        scheduler.add_job(tab_to_sheet_wrapper, 'interval', minutes=15)  # ✅ passe une fonction SANS arguments
+        if not scheduler.get_job("tab_to_sheet_wrapper"):
+            scheduler.add_job(tab_to_sheet_wrapper, 'interval', minutes=1, id="tab_to_sheet_wrapper" ) # ✅ passe une fonction SANS arguments
         scheduler.start()
         logging.info("✅ Scheduler démarré.")
 

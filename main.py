@@ -1,6 +1,8 @@
 import logging
 import sys
 
+from apscheduler.schedulers.background import BackgroundScheduler
+
 from services.database_service.sqlServer_connector import connect_sqlserver, close_sqlserver_connection
 from etatDeMachineNotifMain.etat_de_machine_notif import etat_de_machine_notif
 from services.google_sheets_service.sheets_connector import get_gspread_client
@@ -14,19 +16,22 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S"
 )
-
+client = get_gspread_client()
 def main():
     conn = connect_sqlserver()
 
     if conn is None:
         logging.error("⛔ Connexion MySQL échouée. Arrêt du script.")
         return
-    client = get_gspread_client()
+
     table_to_sheet_main(conn,client)
-    #etat_de_machine_notif(conn)
+    etat_de_machine_notif(conn,client)
     close_sqlserver_connection(conn)
 
 if __name__ == "__main__":
     main()
     from services.scheduler_service.job_scheduler import start_scheduler
-    start_scheduler()
+
+    """Démarre le scheduler APScheduler."""
+    scheduler = BackgroundScheduler()
+    start_scheduler(scheduler)

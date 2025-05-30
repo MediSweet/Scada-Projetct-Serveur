@@ -65,12 +65,10 @@ def transform_data(df, alias, olddate):
             if not pd.isna(olddate_parsed):
                 df_melted = df_melted[df_melted['TriggerTime'] != olddate_parsed]
 
-        # Ajout des colonnes supplémentaires
-        df_melted['Chef Quart'] = ' '
-        df_melted['Opérateur'] = ' '
+
 
         # Réorganisation finale + retour
-        df_final = df_melted[['TriggerTime', 'Machine', 'Chef Quart', 'Opérateur', 'Qte']]
+        df_final = df_melted[['TriggerTime', 'Machine',  'Qte']]
         return df_final.sort_values('TriggerTime', ascending=False, ignore_index=True)
 
     except Exception as e:
