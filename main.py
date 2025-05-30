@@ -17,6 +17,7 @@ logging.basicConfig(
 
 def main():
     conn = connect_sqlserver()
+
     if conn is None:
         logging.error("⛔ Connexion MySQL échouée. Arrêt du script.")
         return
