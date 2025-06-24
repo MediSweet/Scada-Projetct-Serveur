@@ -11,6 +11,7 @@ from services.google_sheets_service.sheets_connector import connect_to_google_sh
 
 def table_to_sheet_main(conn,client):
 
+
     for alias, table_name in TABLES.items():
         try:
             if alias != 'Etat':
@@ -30,8 +31,8 @@ def table_to_sheet_main(conn,client):
                     old_date = None
                 else:
                     # Format the datetime for SQL Server
-                    sql_formatted_time = last_time.strftime('%Y-%m-%dT%H:%M:%S')
-                    query = f"SELECT * FROM {table_name} WHERE TriggerTime >= '{sql_formatted_time}'"
+                    last_time_extended = (last_time - pd.Timedelta(minutes=1)).strftime('%Y-%m-%dT%H:%M:%S')
+                    query = f"SELECT * FROM {table_name} WHERE TriggerTime >= '{last_time_extended}'"
                     old_date = last_time
 
                 new_data = get_data_from_db(query, conn)

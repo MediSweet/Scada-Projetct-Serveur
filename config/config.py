@@ -20,7 +20,7 @@ TABLES = {
     "Vitesse": "DIV_vitess",
     "Vide": "DIV_vide",
     "Synchronisation": "DIV_synch",
-    "Quantité Shift": "DIV_qte_sch",
+    # "Quantité Shift": "DIV_qte_sch",
     "Quantité Jour": "DIV_jour",
     "Etat": "DIV_etat",
     "Temps Perdu": "DIV_temp_prd"

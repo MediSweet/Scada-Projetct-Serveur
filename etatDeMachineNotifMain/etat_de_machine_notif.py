@@ -53,7 +53,11 @@ from services.notification_service.ErrorNotification import envoyer_erreur_googl
 
 def etat_de_machine_notif(conn, client):
     try:
-        logging.info("🚀 Début du traitement de l'état des machines...")
+        logging.info(
+            f"\n\n*************************************************************************************************\n"
+            f"*******************************🚀 Traitement de Etat *************************************\n"
+            f"*************************************************************************************************\n")
+
         sheet = connect_to_google_sheet(client, 'Etat')
         old_row = get_last_row_data(sheet)
 
@@ -64,8 +68,9 @@ def etat_de_machine_notif(conn, client):
         else:
             last_time_str = old_row['TriggerTime']
             last_time = pd.to_datetime(last_time_str).floor('s')
+            sql_formatted_time = last_time.strftime('%Y-%m-%dT%H:%M:%S')
+            query = f"SELECT * FROM DIV_etat WHERE TriggerTime >= '{sql_formatted_time}' ORDER BY TriggerTime DESC"
 
-            query = "SELECT * FROM DIV_etat ORDER BY TriggerTime DESC"
             new_data = get_data_from_db(query, conn)
 
             # Convertir TriggerTime de new_data en datetime (sans millisecondes)
@@ -77,15 +82,15 @@ def etat_de_machine_notif(conn, client):
         if new_data.empty:
             logging.info("📭 Aucune nouvelle donnée trouvée après filtrage.")
             return
+        else:
+            analysis = analyze_machine_states(old_row, new_data)
 
-        analysis = analyze_machine_states(old_row, new_data)
+            if analysis and analysis['status_changes']:
+                notification_message = format_notification_message(analysis)
+                envoyer_erreur_google_chat(notification_message)
 
-        if analysis and analysis['status_changes']:
-            notification_message = format_notification_message(analysis)
-            envoyer_erreur_google_chat(notification_message)
-
-        insert_data_into_sheet(sheet, new_data)
-        logging.info(f"✅ Traitement terminé. {len(new_data)} nouvelles lignes ajoutées.")
+            insert_data_into_sheet(sheet, new_data)
+            logging.info(f"✅ Traitement terminé. {len(new_data)} nouvelles lignes ajoutées.")
 
     except Exception as e:
         logging.error(f"❌ Erreur critique: {str(e)}")
