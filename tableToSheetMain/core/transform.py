@@ -1,6 +1,6 @@
 import pandas as pd
 import logging
-from services.notification_service.ErrorNotification import envoyer_erreur_google_chat
+from services.notification_service.ErrorNotification import envoyer_notification_google_chat
 
 
 def transform_data(df, alias, olddate):
@@ -21,7 +21,7 @@ def transform_data(df, alias, olddate):
         if not machine_columns:
             msg = "⚠️ Aucune colonne machine trouvée !"
             logging.warning(msg)
-            envoyer_erreur_google_chat(msg)
+            envoyer_notification_google_chat(msg)
             return pd.DataFrame()
 
         # Melt
@@ -64,7 +64,7 @@ def transform_data(df, alias, olddate):
 
     except Exception as e:
         logging.error(f"❌ Erreur transformation : {e}", exc_info=True)
-        envoyer_erreur_google_chat(f"❌ Erreur transformation : {e}")
+        envoyer_notification_google_chat(f"❌ Erreur transformation : {e}")
         return pd.DataFrame()
 
 

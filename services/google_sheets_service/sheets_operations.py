@@ -1,6 +1,6 @@
 import logging
 import pandas as pd
-from services.notification_service.ErrorNotification import envoyer_erreur_google_chat
+from services.notification_service.ErrorNotification import envoyer_notification_google_chat
 
 def get_last_row_data(sheet):
     """
@@ -101,7 +101,7 @@ def get_last_row_data_batch(sheet):
 
     except Exception as e:
         logging.error(f"❌ Erreur critique dans get_last_row_data_batch : {str(e)}", exc_info=True)
-        envoyer_erreur_google_chat(f"Erreur récupération dernière ligne : {e}")
+        envoyer_notification_google_chat(f"Erreur récupération dernière ligne : {e}")
         return pd.Series(dtype='object')
 
 
@@ -139,7 +139,7 @@ def get_last_record_date(sheet):
 
     except Exception as e:
         logging.error(f"❌ Erreur récupération dernière ligne : {e}")
-        envoyer_erreur_google_chat(f"Erreur récupération dernière ligne : {e}")
+        envoyer_notification_google_chat(f"Erreur récupération dernière ligne : {e}")
         return pd.to_datetime('1970-01-01')
 
 # def insert_data_into_sheet(sheet, dataframe ):
@@ -187,6 +187,6 @@ def insert_data_into_sheet(sheet, dataframe, tab_name=""):
 
     except Exception as e:
         logging.error(f"❌ [{tab_name}] Erreur insertion : {e}")
-        envoyer_erreur_google_chat(f"Erreur insertion {tab_name} : {e}")
+        envoyer_notification_google_chat(f"Erreur insertion {tab_name} : {e}")
         return 0
 

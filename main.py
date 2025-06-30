@@ -11,12 +11,12 @@ from services.google_sheets_service.sheets_connector import get_gspread_client
 from tableToSheetMain.tableToSheetMain import table_to_sheet_main
 
 sys.path.append("C:/Users/HP/Documents/Pinku doc/Projet Python/scada/PythonProject")
-
-# logging.basicConfig(
-#     level=logging.INFO,
-#     format="%(asctime)s - %(levelname)s - %(message)s",
-#     datefmt="%Y-%m-%d %H:%M:%S"
-# )
+ #
+ # logging.basicConfig(
+ #     level=logging.INFO,
+ #     format="%(asctime)s - %(levelname)s - %(message)s",
+ #     datefmt="%Y-%m-%d %H:%M:%S"
+ # )
 
 # Crée un dossier de logs si nécessaire
 log_dir = "C:\\Users\\Administrateur\\PycharmProjects\\PythonProject\\dist\\logs"

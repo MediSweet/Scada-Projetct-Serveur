@@ -4,7 +4,7 @@ import logging
 
 from Wrappers.tab_to_sheet_wrapper import tab_to_sheet_wrapper, etat_machine_wrapper
 from main import main
-from services.notification_service.ErrorNotification import envoyer_erreur_google_chat
+from services.notification_service.ErrorNotification import envoyer_notification_google_chat
 from tableToSheetMain.tableToSheetMain import table_to_sheet_main
 
 
@@ -39,7 +39,7 @@ def start_scheduler(scheduler):
     except KeyboardInterrupt:
         scheduler.shutdown()
         logging.info("🛑 Scheduler arrêté par l'utilisateur.")
-        envoyer_erreur_google_chat("🛑 Scheduler arrêté manuellement.")
+        envoyer_notification_google_chat("🛑 Scheduler arrêté manuellement.")
     except Exception as e:
         logging.error(f"❌ Erreur dans le scheduler : {e}", exc_info=True)
-        envoyer_erreur_google_chat(f"❌ Erreur dans le scheduler : {e}")
+        envoyer_notification_google_chat(f"❌ Erreur dans le scheduler : {e}")

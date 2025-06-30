@@ -1,7 +1,7 @@
 import pyodbc
 import pandas as pd
 import logging
-from services.notification_service.ErrorNotification import envoyer_erreur_google_chat
+from services.notification_service.ErrorNotification import envoyer_notification_google_chat
 from config.config import SQLSERVER_CONFIG
 from contextlib import closing
 
@@ -36,7 +36,7 @@ def connect_sqlserver():
     except Exception as e:
         logging.error(f"❌ Erreur inattendue de connexion SQL Server : {e}")
 
-    envoyer_erreur_google_chat("❌ Échec de la connexion à SQL Server")
+    envoyer_notification_google_chat("❌ Échec de la connexion à SQL Server")
     return None
 
 
@@ -87,7 +87,7 @@ def get_data_from_db(query, conn):
     except Exception as e:
         logging.error(f"❌ Erreur inattendue lors de la récupération : {e}")
 
-    envoyer_erreur_google_chat("❌ Échec de la récupération des données")
+    envoyer_notification_google_chat("❌ Échec de la récupération des données")
     return pd.DataFrame()
 
 

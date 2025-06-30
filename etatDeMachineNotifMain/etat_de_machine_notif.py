@@ -7,7 +7,7 @@ from etatDeMachineNotifMain.core.notifier import format_notification_message
 from services.database_service.sqlServer_connector import get_data_from_db
 from services.google_sheets_service.sheets_connector import connect_to_google_sheet
 from services.google_sheets_service.sheets_operations import get_last_row_data, insert_data_into_sheet
-from services.notification_service.ErrorNotification import envoyer_erreur_google_chat
+from services.notification_service.ErrorNotification import envoyer_notification_google_chat
 
 
 # def etat_de_machine_notif(conn,client):
@@ -87,12 +87,12 @@ def etat_de_machine_notif(conn, client):
 
             if analysis and analysis['status_changes']:
                 notification_message = format_notification_message(analysis)
-                envoyer_erreur_google_chat(notification_message)
+                envoyer_notification_google_chat(notification_message, 'changement')
 
             insert_data_into_sheet(sheet, new_data)
             logging.info(f"✅ Traitement terminé. {len(new_data)} nouvelles lignes ajoutées.")
 
     except Exception as e:
         logging.error(f"❌ Erreur critique: {str(e)}")
-        envoyer_erreur_google_chat(f"Erreur dans etat_de_machine_notif: {str(e)[:200]}")
+        envoyer_notification_google_chat(f"Erreur dans etat_de_machine_notif: {str(e)[:200]}")
         raise
