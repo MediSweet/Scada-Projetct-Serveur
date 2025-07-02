@@ -14,37 +14,37 @@ def table_to_sheet_main(conn,client):
 
     for alias, table_name in TABLES.items():
         try:
-            if alias != 'Etat':
-                logging.info(f"\n\n*************************************************************************************************\n"
-                             f"*******************************🚀 Traitement de {alias} *************************************\n"
-                             f"*************************************************************************************************\n")
 
-                sheet = connect_to_google_sheet(client,alias)
-                if not sheet:
-                    continue
+            logging.info(f"\n\n*************************************************************************************************\n"
+                         f"*******************************🚀 Traitement de {alias} *************************************\n"
+                         f"*************************************************************************************************\n")
 
-                last_time = get_last_record_date(sheet)
+            sheet = connect_to_google_sheet(client,alias)
+            if not sheet:
+                continue
 
-                if last_time == pd.to_datetime('1970-01-01'):
-                    logging.info("📅 Aucune donnée précédente détectée, récupération complète.")
-                    query = f"SELECT * FROM {table_name}"
-                    old_date = None
-                else:
-                    # Format the datetime for SQL Server
-                    last_time_extended = (last_time - pd.Timedelta(minutes=1)).strftime('%Y-%m-%dT%H:%M:%S')
-                    query = f"SELECT * FROM {table_name} WHERE TriggerTime >= '{last_time_extended}'"
-                    old_date = last_time
+            last_time = get_last_record_date(sheet)
 
-                new_data = get_data_from_db(query, conn)
+            if last_time == pd.to_datetime('1970-01-01'):
+                logging.info("📅 Aucune donnée précédente détectée, récupération complète.")
+                query = f"SELECT * FROM {table_name}"
+                old_date = None
+            else:
+                # Format the datetime for SQL Server
+                last_time_extended = (last_time - pd.Timedelta(minutes=1)).strftime('%Y-%m-%dT%H:%M:%S')
+                query = f"SELECT * FROM {table_name} WHERE TriggerTime >= '{last_time_extended}'"
+                old_date = last_time
 
-                if new_data.empty or len(new_data)==1:
-                    logging.info("📭 Aucune nouvelle donnée trouvée.")
-                    continue
+            new_data = get_data_from_db(query, conn)
 
-                if len(new_data)>1:
-                    transformed_data = transform_data(new_data, alias, old_date)
-                    cleaned_data = clean_data_for_sheets(transformed_data)
-                    insert_data_into_sheet(sheet, cleaned_data, alias)
+            if new_data.empty or len(new_data)==1:
+                logging.info("📭 Aucune nouvelle donnée trouvée.")
+                continue
+
+            if len(new_data)>1:
+                transformed_data = transform_data(new_data, alias, old_date)
+                cleaned_data = clean_data_for_sheets(transformed_data)
+                insert_data_into_sheet(sheet, cleaned_data, alias)
 
         except Exception as e:
             logging.error(f"❌ Erreur critique avec {alias}: {str(e)}", exc_info=True)

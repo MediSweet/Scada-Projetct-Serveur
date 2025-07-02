@@ -17,7 +17,7 @@ def transform_data(df, alias, olddate):
             df['TriggerTime'] = pd.NaT
 
         # Colonnes machines
-        machine_columns = [col for col in df.columns if col.startswith('cola_')]
+        machine_columns = [col for col in df.columns if col.startswith('cola_') or col.startswith('cold_')]
         if not machine_columns:
             msg = "⚠️ Aucune colonne machine trouvée !"
             logging.warning(msg)
@@ -32,15 +32,19 @@ def transform_data(df, alias, olddate):
             var_name='Machine',
             value_name='QteCumul'
         )
-        df_melted['Machine'] = df_melted['Machine'].str.replace('cola_', '', regex=False)
 
+        df_melted['Machine'] = df_melted['Machine'].str.replace(r'^cola_', '', regex=True)
+        df_melted['Machine'] = df_melted['Machine'].str.replace(r'^cold_', ' ', regex=True)
         # Convertir TriggerTime en datetime (arrondi seconde)
         df_melted['TriggerTime'] = pd.to_datetime(df_melted['TriggerTime']).dt.floor('s')
 
         # Tri
         df_melted.sort_values(['Machine', 'TriggerTime'], inplace=True, ignore_index=True)
 
-        if alias == 'Vitesse':
+        # Liste des alias où on veut utiliser la valeur brute plutôt que le diff
+        TableDonnéeNonCumuler = ['Vitesse', ]
+
+        if alias in TableDonnéeNonCumuler:
             df_melted['Qte'] = pd.to_numeric(df_melted['QteCumul'], errors='coerce').fillna(0)
         else:
             df_melted['Qte'] = df_melted.groupby('Machine', group_keys=False)['QteCumul'].diff()

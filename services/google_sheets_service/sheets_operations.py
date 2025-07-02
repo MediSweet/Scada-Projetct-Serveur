@@ -14,15 +14,18 @@ def get_last_row_data(sheet):
                    ou une Series vide si le sheet est vide.
     """
     try:
-        all_values = sheet.get_all_values()
+        # all_values = sheet.get_all_values()
+        #
+        #
+        # if not all_values or len(all_values) < 2:
+        #     logging.info("Le sheet est vide ou ne contient que les en-têtes.")
+        #     return pd.Series(dtype='object')
 
-        if not all_values or len(all_values) < 2:
-            logging.info("Le sheet est vide ou ne contient que les en-têtes.")
-            return pd.Series(dtype='object')
-
-        headers = all_values[0]
-        last_row_values = all_values[-1]
-
+        # headers = all_values[0]
+        # last_row_values = all_values[-1]
+        headers = sheet.row_values(1)
+        last_row_index = sheet.row_count
+        last_row_values = sheet.row_values(last_row_index)
         # Associer les valeurs aux en-têtes
         last_row_dict = {
             header: last_row_values[i] if i < len(last_row_values) else None

@@ -17,17 +17,17 @@ def start_scheduler(scheduler):
                 minutes=15,
                 id="tab_to_sheet_wrapper",
                 max_instances=1,
-                coalesce=True
+                coalesce=True,replace_existing=True  # Clé importante
             )
 
         if not scheduler.get_job("etat_machine_wrapper"):
             scheduler.add_job(
                 etat_machine_wrapper,
                 'interval',
-                seconds=10,
+                seconds=20,
                 id="etat_machine_wrapper",
                 max_instances=1,
-                coalesce=True
+                coalesce=True,replace_existing=True  # Clé importante
             )
 
         scheduler.start()
